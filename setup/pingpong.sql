@@ -1,9 +1,3 @@
-DROP DATABASE pingpong;
-
-CREATE DATABASE pingpong;
-
-\connect pingpong;
-
 CREATE TABLE player(
   Rank INT,
   Name TEXT
