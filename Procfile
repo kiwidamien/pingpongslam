@@ -1,1 +1,1 @@
-web: gunicorn pingpongslam:app 
+web: gunicorn start_bot:app
