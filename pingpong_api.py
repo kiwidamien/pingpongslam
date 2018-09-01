@@ -44,9 +44,9 @@ def get_winner_loser_score(score):
     """Returns a tuple of winner, loser scores"""
     match_score = score.split('-')
     match_score = list(map(int, match_score))
-    winner_score = max(match_score)
-    loser_score = min(match_score)
-    return {'winner_score': winner_score, 'loser_score': loser_score}
+    score_winner = max(match_score)
+    score_loser = min(match_score)
+    return {'score_winner': score_winner, 'score_loser': score_loser}
 
 
 
