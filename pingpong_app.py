@@ -49,6 +49,8 @@ def store_result():
         score_winner = get_winner_loser_score(score)['score_winner']
         score_loser = get_winner_loser_score(score)['score_loser']
         # leaderboard = pull_leaderboard()
+
+        #WILL HAVE TO BE REPLACED BY JENMEENT'S FUNCTION FOR LEADERBOARD
         leaderboard = [{'id':'jwong','record':'52-0','previous_rank':'1'},
                            {'id':'brett','record':'26-7','previous_rank':'2'},
                            {'id':'damien','record':'24-3','previous_rank':'3'}]
