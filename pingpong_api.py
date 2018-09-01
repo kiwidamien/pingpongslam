@@ -20,6 +20,29 @@ def is_player_valid(player, player_list):
     """Checks if the player exists in the players table"""
     return player in player_list
 
+def is_date_valid(date):
+    """Checks if the date is valid"""
+    try:
+        year, month, day = date.split('-')
+        if int(year) not in range(2018, 2023):
+            return False
+        elif int(month) not in range(1, 13):
+            return False
+        elif int(day) not in range(1, 32):
+            return False
+        else:
+            return True
+    except:
+        print('exception')
+        return False
+
+def is_challenger_valid(challenger, winner, loser):
+    """Checks if the challenger is one of the players"""
+    if challenger != winner and challenger != loser:
+        return False
+    else:
+        return True
+
 def is_score_valid(score):
     """Checks if the score is valid"""
     try:
@@ -48,7 +71,16 @@ def get_winner_loser_score(score):
     score_loser = min(match_score)
     return {'score_winner': score_winner, 'score_loser': score_loser}
 
+def get_prev_rank(player, leaderboard):
+    """Retrievs the rank of the player"""
+    player_rank = 0
 
+    for row in leaderboard:
+        if row['id'] == player:
+            player_rank = int(row['previous_rank'])
+        else:
+            pass
+    return player_rank
 
 # if __name__ == '__main__':
 #     print(test_match)
