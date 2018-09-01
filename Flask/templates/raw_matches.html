@@ -1,0 +1,44 @@
+<html>
+<title>Game Records</title>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+  <link rel='stylesheet' href='/static/css/style.css'/>
+</head>
+
+<body>
+
+<div class="explanation" text-center id='description'>
+    <!-- style='margin-bottom'> -->
+    <h1>Match History<h1>
+    <p>Here are all of {{username}}'s matches.</p>
+</div>
+<br>
+
+<div class="container">
+<table class="matches" id="matches" cellpadding="5">
+    <tr align="left">
+        <th>Date</th>
+        <th>Score</th>
+        <th>Winner</th>
+        <th>Loser</th>
+        <th>User Rank</th>
+    </tr>
+
+        {% for item in matches %}
+    <tr align="left">
+        <td>{{item.date}}</td>
+        <td>{{item.score}}</td>
+        <td>{{item.winner}}</td>
+        <td>{{item.loser}}</td>
+        <td>{{item.rank_of_user}}</td>
+    </tr>
+        {% endfor %}
+    </div>
+
+</table>
+</body>
+</html>
