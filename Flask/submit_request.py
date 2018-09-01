@@ -2,12 +2,10 @@ from flask import Flask, abort, render_template, jsonify, request
 import datetime as dt
 import psycopg2
 from pingpong_api import *
+from make_app import app
 
-app = Flask('PingPongApp')
-
-@app.route('/submit_result', methods=['POST'])
+@app.route('/api/submit_result', methods=['POST'])
 def store_result():
-
     #Connect to the database and create a cursor
     conn = psycopg2.connect(dbname="pingpong", user="auste_m")
     cursor = conn.cursor()
@@ -24,7 +22,9 @@ def store_result():
     entered_time = dt.datetime.now()
 
     #Check if the players entered are valid
-    players = ['brett', 'jwong']
+
+    #NEED TO RETRIEVE THE PLAYER'S COLUMN FROM PLAYER TABLE
+    players = ['brett', 'jwong', 'damien']
     if is_player_valid(winner, players) == False:
         response = f"{winner} doesn't exist. Please enter a valid winner's username."
 
@@ -70,19 +70,12 @@ def store_result():
         cursor.execute(insert_result)
         conn.commit()
         if enterer == winner:
-            response = f'Congrats, keep it up!' #u"\U0001f44d"
+            response = f'Congrats, keep it up! Thanks for submitting the result.' #u"\U0001f44d"
         elif enterer == loser:
-            response = f'Woa woa! Better luck next time...' #u"\U0001F44E"
+            response = f'Woah woah...thanks for submitting the result, better luck next time.' #u"\U0001F44E"
         else:
-            response = f'Thank you, {enterer}, for submitting match result.' #u"\U0001F609"
+            response = f'Thank you for submitting match result, {enterer}.' #u"\U0001F609"
 
         conn.close()
 
     return jsonify(response)
-
-
-# @app.route('/')
-# def index():
-#     return render_template('index.html')
-
-app.run(debug=True)
