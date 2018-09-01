@@ -1,14 +1,16 @@
+DROP DATABASE pingpong;
+
 CREATE DATABASE pingpong;
 
 \connect pingpong;
 
 CREATE TABLE player(
   Rank INT,
-  Name TEXT,
+  Name TEXT
 );
 
-CREATE TABLE match(
-  Match_ID int NOT NULL AUTO_INCREMENT,
+CREATE TABLE match_result(
+  Match_ID SERIAL PRIMARY KEY,
   Winner TEXT,
   Loser TEXT,
   Score_winner INT,
@@ -18,8 +20,7 @@ CREATE TABLE match(
   Who_challenged TEXT,
   Win_rank INT,
   Lose_rank INT,
-  Entered_time DATETIME,
-  PRIMARY KEY (Match_ID)
+  Entered_time TIMESTAMP
   
 );
 
@@ -27,29 +28,29 @@ CREATE TABLE match(
 /* from the view, we want to have rows of people, and the columns 
 
 */
-CREATE VIEW player_match(
+CREATE VIEW player_match AS (
 	with lost_matches as (
-		select Loser as user, Score_loser as score, Lose_rank as rank, 'loser' as outcome 
-		from match
+		select Match_ID, Loser as user, Score_loser as score, Lose_rank as rank, 'loser' as outcome 
+		from match_result
 		
 	)
 	,
-	with win_matches as (
-		select Winner as user, Score_winner as score, Win_rank as rank, 'winner' as outcome
-		from match
+	win_matches as (
+		select Match_ID, Winner as user, Score_winner as score, Win_rank as rank, 'winner' as outcome
+		from match_result
 	)
   select *
   from lost_matches
   union
   select * 
   from win_matches
-  order by match_id desc; 
+  order by Match_ID desc 
 
 );
 
 
 \copy player FROM 'player_table.csv' DELIMITER ',' CSV HEADER;
-\copy match FROM 'match_data.csv' DELIMITER ',' CSV HEADER;
+\copy match_result FROM 'match_data.csv' DELIMITER ',' CSV HEADER;
 
 
 
