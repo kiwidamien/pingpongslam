@@ -43,8 +43,8 @@ CREATE VIEW player_match AS (
 );
 
 
-\copy player FROM 'player_table.csv' DELIMITER ',' CSV HEADER;
-\copy match_result FROM 'match_data.csv' DELIMITER ',' CSV HEADER;
+\copy player FROM 'setup/player_table.csv' DELIMITER ',' CSV HEADER;
+\copy match_result FROM 'setup/match_data.csv' DELIMITER ',' CSV HEADER;
 
 
 
