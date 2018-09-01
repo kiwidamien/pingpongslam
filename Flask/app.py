@@ -11,36 +11,40 @@ def homepage():
 
 
 #  Leaderboard
-@app.route('/api/leaderboard/')
+@app.route('/leaderboard/')
 def get_leaderboard():
-    return render_template('leaderboard.html')
+    ranks = [{'id': 'Jenn Wong', 'record': '150-0', 'previous_rank': '2'},
+             {'id': 'Auste M.', 'record': '22-4', 'previous_rank': '5'},
+             {'id': 'Harmeet Hora', 'record': '50-5', 'previous_rank': '3'},
+             {'id': 'Ilan M.', 'record': '10-1', 'previous_rank': '1'}]
+    return render_template('leaderboard.html', ranks=ranks)
 
 
 #  Get top n from Leaderboard
-@app.route('/api/leaderboard/top/<n>/')
+@app.route('/leaderboard/top/<n>/')
 def get_leaderboard_take_n(n):
     pass
 
 
 # Get matches for given user
-@app.route('/api/<username>/')
+@app.route('/username/<username>/')
 def get_matches(username):
+    matches = [{'date':'1/9/2018','score':'12-0','winner':'Jenn Wong','loser':'Brett','rank_of_user':'1'},
+               {'date':'31/8/2018','score':'15-0','winner':'Jenn Wong','loser':'Brett','rank_of_user':'2'},
+               {'date':'30/8/2018','score':'11-0','winner':'Jenn Wong','loser':'Brett','rank_of_user':'2'},
+               {'date':'29/8/2018','score':'14-0','winner':'Jenn Wong','loser':'Brett','rank_of_user':'2'}]
+    return render_template('raw_matches.html', matches=matches, username=username)
+
+
+# Get most n recent matches for given user
+@app.route('/api/<username>/recent/<n>/')
+def get_recent_matches(username, n):
     pass
 
 
 #  Get list of people to challenge
 @app.route('/api/<username>/can_challenge/')
 def get_list_can_challenge(username):
-    return """
-    <h1>Welcome to the app.</h1>
-
-    Hi {}, here are the people you can challenge:
-    """.format(username)
-
-
-# Get most n recent matches for given user
-@app.route('/api/<username>/recent/<n>/')
-def get_recent_matches(username, n):
     pass
 
 

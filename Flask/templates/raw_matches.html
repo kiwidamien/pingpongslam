@@ -1,5 +1,5 @@
 <html>
-<title>Leaderboard</title>
+<title>Game Records</title>
 
 <head>
   <meta charset="utf-8">
@@ -13,28 +13,32 @@
 
 <div class="explanation" text-center id='description'>
     <!-- style='margin-bottom'> -->
-    <h1>Ping Pong Leaderboard<h1>
-    <p>This page dictates who laughs and who cries.</p>
+    <h1>Match History<h1>
+    <p>Here are all of {{username}}'s matches.</p>
 </div>
 <br>
 
 <div class="container">
-<table class="leaderboard" id="leader" cellpadding="5">
+<table class="matches" id="matches" cellpadding="5">
     <tr align="left">
-        <th>Person</th>
-        <th>Record</th>
-        <th>Previous Rank</th>
+        <th>Date</th>
+        <th>Score</th>
+        <th>Winner</th>
+        <th>Loser</th>
+        <th>User Rank</th>
     </tr>
 
-        {% for item in ranks %}
+        {% for item in matches %}
     <tr align="left">
-        <td>{{item.id}}</td>
-        <td>{{item.record}}</td>
-        <td>{{item.previous_rank}}</td>
+        <td>{{item.date}}</td>
+        <td>{{item.score}}</td>
+        <td>{{item.winner}}</td>
+        <td>{{item.loser}}</td>
+        <td>{{item.rank_of_user}}</td>
     </tr>
         {% endfor %}
+    </div>
 
 </table>
-</div>
 </body>
 </html>
