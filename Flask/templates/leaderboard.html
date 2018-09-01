@@ -1,0 +1,39 @@
+<html>
+<title>Leaderboard</title>
+
+<table>
+    <tr>
+        <th>Person</th>
+        <th>Record</th>
+        <th>Previous Rank</th>
+    </tr>
+    <tr>
+        <td>Jenn Wong</td>
+        <td>150-0</td>
+        <td>2</td>
+    </tr>
+</table>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js">
+</script>
+<script>
+function fill(){
+    let entries = {
+        'Person' : Jenn Wong,
+        'Record' : 150-0,
+        'Previous Rank' : 2
+    }
+
+$.ajax({
+    type: "GET",
+    contentType: "application/json; charset=utf-8",
+    url: "/api/leaderboard",
+    dataType: "text",  //?
+    
+
+})
+}
+
+</script>
+
+</html>
