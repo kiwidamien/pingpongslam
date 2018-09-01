@@ -16,15 +16,17 @@ port = url.port
 @app.route('/')
 def index():
     con = psycopg2.connect(
-        dname=dbname,
+        dbname=dbname,
         user=user,
         password=password,
         host=host,
         port=port
     )
     cursor = con.cursor()
+    cursor.execute('SELECT * FROM player;')
+    results = cursor.fetchall()
     con.close()
-    return "Hello from Flask"
+    return f"Hello from Flask, {str(results)}"
 
 if __name__ == '__main__':
     app.run()
