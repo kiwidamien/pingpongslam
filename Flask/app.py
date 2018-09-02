@@ -53,7 +53,9 @@ def get_list_can_challenge(username):
 def give_match_result():
     if not request.json:
         abort(400)
-    return render_template('index.html')
+    data = request.json
+    response = submit_result(data)
+    return jsonify(response)
 
 
 
