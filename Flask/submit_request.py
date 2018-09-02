@@ -8,11 +8,13 @@ from leaderboard import pull_leaderboard
 @app.route('/api/submit_result', methods=['POST'])
 def store_result():
     #Connect to the database and create a cursor
-    conn = psycopg2.connect(dbname="pingpong", user="auste_m")
+    conn = psycopg2.connect(dbname="pingpong", user="tarekbarnes")
     cursor = conn.cursor()
 
     if not request.json:
         abort(400)
+
+    print(request.json)
     match_result = request.json
     winner = match_result['winner']
     loser = match_result['loser']
@@ -25,22 +27,22 @@ def store_result():
     #Check if the players entered are valid
     if is_player_valid(winner) == False:
         response = f"{winner} doesn't exist. Please enter a valid winner's username."
-
+        abort(403)
     elif is_player_valid(loser) == False:
         response = f"{loser} doesn't exist. Please enter a valid loser's username."
-
+        abort(403)
     #Check if the score entered is valid
     elif is_score_valid(score) == False:
         response = f"{score} is not a valid score, get your act together and input it properly!"
-
+        abort(400)
     #Check if the date entered is valid
     elif is_date_valid(match_date) == False:
         response = f'{match_date} is not valid. Please enter a valid match date.'
-
+        abort(400)
     #Check if the challenger is one of the players
     elif is_challenger_valid(challenger, winner, loser) == False:
         response = f'The challenger must be one of the players.'
-
+        abort(400)
     else:
         cursor.execute("""SELECT MAX(match_id) FROM match_result""")
         last_id = cursor.fetchone()[0]

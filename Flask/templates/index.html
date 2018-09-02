@@ -5,15 +5,17 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-  <!-- <link rel='stylesheet' href='/static/css/style.css'/> -->
+  <link rel='stylesheet' href='/static/css/style2.css'/>
 </head>
 
 <body>
 
+
     <div class="directions" text-center id="directions">
-        Submit the result of your last game here.
-        <br><br>
+        <h1>Submit Game Result</h1>
+        <p>If you don't log it, it never happened.</p>
     </div>
+    <br>
 
 
       <form id="ajax-contact" method="post">
@@ -21,24 +23,29 @@
               <label for="winner">Winner: <br></label>
               <input type="text" id="winner" name="winner"><br>
           </div>
+
           <div class="field">
               <label for="loser">Loser: <br></label>
               <input type="text" id="loser" name="loser"><br>
           </div>
+
           <div class="field">
               <label for="score">Final score: <br></label>
               <input type="text" id="score" name="score"><br>
           </div>
+
           <div class="field">
               <label for="date">Date of match: <br></label>
-              <input type="text" id="date_of_match" name="date_of_match"><br>
+              <input type="text" id="match_date" name="match_date"><br>
           </div>
+
           <div class="field">
               <label for="who_entered">Your name: <br></label>
               <input type="text" id="who_entered" name="who_entered"><br>
           </div>
+
           <div class="field">
-              <label for="who_challenged">Who initiated this match?: <br></label>
+              <label for="who_challenged">Challenger: <br></label>
               <input type="text" id="who_challenged" name="who_challenged"><br>
           </div>
       </form>
@@ -63,7 +70,7 @@
       "winner": $('#winner').val(),
       "loser": $('#loser').val(),
       "score": $('#score').val(),
-      "date_of_match": $('#date_of_match').val(),
+      "match_date": $('#match_date').val(),
       "who_entered": $('#who_entered').val(),
       "who_challenged": $('#who_challenged').val()
     }
@@ -73,21 +80,22 @@
     $.ajax({
       type: "POST",
       contentType: "application/json; charset=utf-8",
-      url: "/submit_result",  // Replace with URL of POST handler
+      url: "/api/submit_result",  // Replace with URL of POST handler
       dataType: "json",
       async: true,
       data: JSON.stringify(result),
       success: (result) => {
-        $('#form-messages').text(response);
+        $('#form-messages').text(result);
         $('#winner').val('');
         $('#loser').val('');
         $('#score').val('');
-        $('#date_of_match').val('');
+        $('#match_date').val('');
         $('#who_entered').val('');
         $('#who_challenged').val('');
       },
-      
+
       error: (result) => {
+          console.log(result);
         alert('You did something wrong.');
       }
     })
