@@ -18,17 +18,19 @@
 </div>
 <br>
 
-<div class="container">
+<div style='width: 900px;'class="container">
 <table class="leaderboard" id="leader" cellpadding="5">
-    <tr align="left">
+    <tr align="center">
+        <th style='width: 20%;'>Current Rank</th>
         <th>Person</th>
         <th>Record</th>
-        <th>Previous Rank</th>
+        <th style='width: 20%;'>Previous Rank</th>
     </tr>
 
         {% for item in ranks %}
-    <tr align="left">
-        <td>{{item.id}}</td>
+    <tr align="center">
+        <td>{{loop.index}}</td>
+        <td> <a href="{{url_for('get_matches', username=item.id)}}">{{item.id}}</a></td>
         <td>{{item.record}}</td>
         <td>{{item.previous_rank}}</td>
     </tr>
