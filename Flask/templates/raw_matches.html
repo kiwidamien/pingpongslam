@@ -32,8 +32,8 @@
     <tr align="left">
         <td>{{item.date}}</td>
         <td>{{item.score}}</td>
-        <td>{{item.winner}}</td>
-        <td>{{item.loser}}</td>
+        <td> <a href="{{url_for('get_matches', username=item.winner)}}">{{item.winner}}</a></td>
+        <td> <a href="{{url_for('get_matches', username=item.loser)}}">{{item.loser}}</a></td>
         <td>{{item.rank_of_user}}</td>
     </tr>
         {% endfor %}
