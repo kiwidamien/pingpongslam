@@ -42,7 +42,6 @@ def is_score_valid(score):
         elif min(match_score) < 20 and max(match_score) > 21:
             return False
         elif max(match_score) - min(match_score) < 2:
-            print(max(match_score) - min(match_score))
             return False
         else:
             return True

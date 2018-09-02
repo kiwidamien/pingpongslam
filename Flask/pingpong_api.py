@@ -42,7 +42,7 @@ def is_score_valid(score):
         elif min(match_score) < 20 and max(match_score) > 21:
             return False
         elif min(match_score) >= 20 and max(match_score) - min(match_score) != 2:
-            return False            
+            return False
         elif max(match_score) - min(match_score) < 2:
             return False
         else:
@@ -69,6 +69,24 @@ def get_prev_rank(player, leaderboard):
         else:
             pass
     return player_rank
+
+def get_two_players_above(player, leaderboard):
+    """Retrievs two players above the passed in player"""
+    candidate_list = []
+
+    for row_index in range(len(leaderboard)):
+        if leaderboard[row_index]['id'] == player:
+            if row_index == 0:
+                return 'You are the leader!'
+            elif row_index == 1:
+                player_and_rank_dir_above = (leaderboard[row_index-1]['id'], row_index)
+                candidate_list.append(player_and_rank_dir_above)
+            else:
+                player_and_rank_2pos_above = (leaderboard[row_index-2]['id'], row_index-1)
+                candidate_list.append(player_and_rank_2pos_above)
+                player_and_rank_dir_above = (leaderboard[row_index-1]['id'], row_index)
+                candidate_list.append(player_and_rank_dir_above)
+    return candidate_list
 
 # if __name__ == '__main__':
 #     print(test_match)

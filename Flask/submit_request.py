@@ -56,9 +56,7 @@ def store_result():
                            {'id':'brett','record':'26-7','previous_rank':'2'},
                            {'id':'damien','record':'24-3','previous_rank':'3'}]
         winner_rank = get_prev_rank(winner, leaderboard)
-        print(winner_rank)
         loser_rank = get_prev_rank(loser, leaderboard)
-        print(loser_rank)
 
         insert_result = """INSERT INTO match_result(match_id, winner, loser, score_winner, score_loser,
                                                             match_date, who_entered, who_challenged,
