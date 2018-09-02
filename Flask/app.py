@@ -46,9 +46,17 @@ def get_matches(username):
 
 # Get most n recent matches for given user
 @app.route('/api/<username>/recent/<n>/')
-def get_recent_matches(username, n):
-    pass
+def get_recent_matches_api(username, n):
+    n = int(n)
+    matches = get_user_history(username)[:n]
+    return jsonify(matches)
 
+# Get most n recent matches for given user
+@app.route('/username/<username>/recent/<n>/')
+def get_recent_matches(username, n):
+    n = int(n)
+    matches = get_user_history(username)[:n]
+    return render_template('raw_matches.html', matches=matches, username=username)
 
 #  Get list of people to challenge
 @app.route('/api/<username>/can_challenge/')
