@@ -4,8 +4,8 @@ from flask import Flask, render_template, jsonify, request, abort
 from make_app import app
 from submit_request import store_result
 from can_challenge import you_can_challenge
-
 from leaderboard import pull_leaderboard
+from user_history import get_user_history
 
 #  Homepage
 @app.route('/')
