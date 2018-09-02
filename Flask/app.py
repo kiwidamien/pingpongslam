@@ -40,10 +40,7 @@ def get_leaderboard_take_n(n):
 # Get matches for given user
 @app.route('/username/<username>/')
 def get_matches(username):
-    matches = [{'date':'1/9/2018','score':'12-0','winner':'Jenn Wong','loser':'Brett','rank_of_user':'1'},
-               {'date':'31/8/2018','score':'15-0','winner':'Jenn Wong','loser':'Brett','rank_of_user':'2'},
-               {'date':'30/8/2018','score':'11-0','winner':'Jenn Wong','loser':'Brett','rank_of_user':'2'},
-               {'date':'29/8/2018','score':'14-0','winner':'Jenn Wong','loser':'Brett','rank_of_user':'2'}]
+    matches = get_user_history(username)
     return render_template('raw_matches.html', matches=matches, username=username)
 
 
