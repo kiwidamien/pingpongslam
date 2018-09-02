@@ -61,7 +61,7 @@ def pull_leaderboard():
             'id': id,
             'record': user_dict[id]['record'],
             'rank': user_dict[id].get('rank', initial_rank),
-            'prev_rank': user_dict[id].get('prev_rank', initial_rank)
+            'previous_rank': user_dict[id].get('prev_rank', initial_rank)
         })
     print('this is the list')
     newlist = sorted(list_of_users, key=lambda k: k['rank'])
