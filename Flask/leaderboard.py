@@ -1,19 +1,14 @@
 import psycopg2 as pg
 import os
+from get_db_connection import get_connection
 
 def pull_leaderboard():
 
-    connection_args = {
-        'host': 'localhost',
-        'user': 'tarekbarnes',
-        'dbname': 'pingpong',
-    }
-
-    connection = pg.connect(**connection_args)
+    conn = get_connection()
     #print('worked')
 
     user_dict = {}
-    cursor = connection.cursor()
+    cursor = conn.cursor()
     record_query = """
     WITH win_record as (
         SELECT player,
@@ -65,8 +60,8 @@ def pull_leaderboard():
         })
     print('this is the list')
     newlist = sorted(list_of_users, key=lambda k: k['rank'])
+    conn.close()
     return(newlist)
-    connection.close()
 
 
 if __name__ == '__main__':

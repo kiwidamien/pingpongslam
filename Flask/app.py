@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, jsonify, request, abort
+from flask import Flask, url_for, render_template, jsonify, request, abort
 
 from make_app import app
 from submit_request import store_result
@@ -41,14 +41,24 @@ def get_leaderboard_take_n(n):
 @app.route('/username/<username>/')
 def get_matches(username):
     matches = get_user_history(username)
-    return render_template('raw_matches.html', matches=matches, username=username)
+    challenges = you_can_challenge(username)
+    return render_template('raw_matches.html', matches=matches, username=username, challenges=challenges)
 
 
 # Get most n recent matches for given user
 @app.route('/api/<username>/recent/<n>/')
-def get_recent_matches(username, n):
-    pass
+def get_recent_matches_api(username, n):
+    n = int(n)
+    matches = get_user_history(username)[:n]
+    return jsonify(matches)
 
+# Get most n recent matches for given user
+@app.route('/username/<username>/recent/<n>/')
+def get_recent_matches(username, n):
+    n = int(n)
+    matches = get_user_history(username)[:n]
+    challenges = you_can_challenge(username)
+    return render_template('raw_matches.html', matches=matches, username=username, challenges=challenges)
 
 #  Get list of people to challenge
 @app.route('/api/<username>/can_challenge/')

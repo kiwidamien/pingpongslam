@@ -13,7 +13,7 @@
 
 <div class="explanation" text-center id='description'>
     <!-- style='margin-bottom'> -->
-    <h1>Match History<h1>
+    <h1>Match History</h1>
     <p>Here are all of {{username}}'s matches.</p>
 </div>
 <br>
@@ -28,19 +28,45 @@
         <th>User Rank</th>
     </tr>
 
-        {% for item in matches %}
-    <tr align="left">
-        <td>{{item.date}}</td>
-        <td>{{item.score}}</td>
-        <td> <a href="{{url_for('get_matches', username=item.winner)}}">{{item.winner}}</a></td>
-        <td> <a href="{{url_for('get_matches', username=item.loser)}}">{{item.loser}}</a></td>
-        <td>{{item.rank_of_user}}</td>
-    </tr>
-        {% endfor %}
-    </div>
+        {% if matches | length > 0 %}
+          {% for item in matches %}
+            <tr align="left">
+                <td>{{item.date}}</td>
+                <td>{{item.score}}</td>
+                <td> <a href="{{url_for('get_matches', username=item.winner)}}">{{item.winner}}</a></td>
+                <td> <a href="{{url_for('get_matches', username=item.loser)}}">{{item.loser}}</a></td>
+                <td>{{item.rank_of_user}}</td>
+            </tr>
+          {% endfor %}
+        {% else %}
+          <tr align="center">
+            <td colspan="5">You've played no matches</td>
+          </tr>
+        {% endif %}
+        </table>
 
-</table>
-  <a href={{url_for('get_leaderboard')}}>Take me to the Leaderboard</a>
+
+    <h3>Here are the players you can challenge:</h3>
+
+    <table class="matches" id="challenges" cellpadding="5">
+        <tr align="left">
+            <th>Player</th>
+            <th>User Rank</th>
+        </tr>
+
+              {% for item in challenges %}
+                <tr align="left">
+                    <td> <a href="{{url_for('get_matches', username=item[0])}}">{{item[0]}}</a></td>
+                    <td>{{item[1]}}</td>
+                </tr>
+              {% endfor %}
+    </table>
+
+        <a href={{url_for('get_leaderboard')}}>Take me to the Leaderboard</a>
+
+  </div>
+
+
 
 </body>
 </html>

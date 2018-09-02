@@ -1,3 +1,5 @@
+<!-- from Flask import url_for -->
+
 <html>
 <title>Leaderboard</title>
 
@@ -13,34 +15,42 @@
 
 <div class="explanation" text-center id='description'>
     <!-- style='margin-bottom'> -->
-    <h1>Ping Pong Leaderboard<h1>
+    <h1>Ping Pong Leaderboard</h1>
     <p>This page dictates who laughs and who cries.</p>
 </div>
 <br>
 
-<div class="container">
+<div style='width: 900px;'class="container">
 <table class="leaderboard" id="leader" cellpadding="5">
-    <tr align="left">
+    <tr align="center">
+        <th style='width: 20%;'>Current Rank</th>
         <th>Person</th>
         <th>Record</th>
-        <th>Previous Rank</th>
+        <th style='width: 20%;'>Previous Rank</th>
     </tr>
 
         {% for item in ranks %}
-    <tr align="left">
-        <td>{{item.id}}</td>
+    <tr align="center">
+        <td>{{loop.index}}</td>
+        <td> <a href="{{url_for('get_matches', username=item.id)}}">{{item.id}}</a></td>
         <td>{{item.record}}</td>
         <td>{{item.previous_rank}}</td>
     </tr>
         {% endfor %}
+
+
 
 </table>
 </div>
 
 <div class="shenanigans" text-center id='shenanigans'>
 <h2>Lies and Slander?</h2>
-<p>Do you think this table is a lie?</p>
-<p>Do you have bouts of uncontrollable rage every time Jen beats you?</p>
+<p>
+    Do you think this table's a lie and misrepresents your current social status?<br>
+    Do you have regular bouts of uncontrollable rage every time Jen beats you?<br>
+    Stop whining and do a better job of <a href={{url_for('index')}}>logging matches!</a>
+
+</p>
 </div>
 </body>
 </html>

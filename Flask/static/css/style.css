@@ -3,7 +3,11 @@ body{
   font-family: 'Calibri';
 }
 
-#leader, #matches{
+#leader{
+    background-color: #A76571;
+}
+
+.matches{
     background-color: #A76571;
 }
 
@@ -27,9 +31,9 @@ h2{
 
 p{
     font-size: 18;
-    margin-bottom: 20;
-    margin-left: 20px;
-    margin-top: 20;
+    /* margin-bottom: 20; */
+    margin-left: 25;
+    /* margin-top: 20; */
 }
 
 table{
@@ -48,5 +52,11 @@ th{
 
 tr:nth-child(even){
   font-size: 16;
-  background-color: #C38D94
+  background-color: #C38D94;
+}
+
+
+a{
+    /* border: 1px solid; */
+    color: #0a1fa8;
 }
