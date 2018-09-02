@@ -3,14 +3,15 @@ import datetime as dt
 import psycopg2
 from pingpong_api import *
 
-#Connect to the database and create a cursor
-conn = psycopg2.connect(dbname="pingpong", user="auste_m")
-cursor = conn.cursor()
-
 app = Flask('PingPongApp')
 
 @app.route('/submit_result', methods=['POST'])
 def store_result():
+
+    #Connect to the database and create a cursor
+    conn = psycopg2.connect(dbname="pingpong", user="auste_m")
+    cursor = conn.cursor()
+
     if not request.json:
         abort(400)
     match_result = request.json
@@ -74,6 +75,8 @@ def store_result():
             response = f'Woa woa! Better luck next time...' #u"\U0001F44E"
         else:
             response = f'Thank you, {enterer}, for submitting match result.' #u"\U0001F609"
+
+        conn.close()
 
     return jsonify(response)
 

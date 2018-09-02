@@ -5,7 +5,7 @@ def pull_leaderboard():
 
     connection_args = {
         'host': 'localhost',
-        'user': os.environ['USER'],
+        'user': 'auste_m',
         'dbname': 'pingpong',
     }
 

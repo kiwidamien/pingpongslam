@@ -1,9 +1,11 @@
 import os
 from flask import Flask, render_template, jsonify, request, abort
-from leaderboard import pull_leaderboard
 
-#  Initialization
-app=Flask('PingPongApp')
+from make_app import app
+from submit_request import store_result
+from can_challenge import you_can_challenge
+
+from leaderboard import pull_leaderboard
 
 #  Homepage
 @app.route('/')
@@ -55,19 +57,6 @@ def get_recent_matches(username, n):
 @app.route('/api/<username>/can_challenge/')
 def get_list_can_challenge(username):
     pass
-
-
-
-@app.route('/submit_result/', methods=['POST'])
-def give_match_result():
-    if not request.json:
-        abort(400)
-    data = request.json
-    response = submit_result(data)
-    return jsonify(response)
-
-
-
 
 if __name__ == '__main__':
   port = int(os.environ.get('PORT', 5000))
