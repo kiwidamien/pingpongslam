@@ -6,8 +6,8 @@ app=Flask('PingPongApp')
 
 #  Homepage
 @app.route('/')
-def homepage():
-    return render_template('pingpong.html')
+def index():
+    return render_template('index.html')
 
 
 #  Leaderboard
@@ -49,9 +49,12 @@ def get_list_can_challenge(username):
 
 
 
-@app.route('/api/submit_result/', methods=['POST'])
+@app.route('/submit_result/', methods=['POST'])
 def give_match_result():
-    pass
+    if not request.json:
+        abort(400)
+    return render_template('index.html')
+
 
 
 
