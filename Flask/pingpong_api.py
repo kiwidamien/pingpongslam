@@ -1,7 +1,18 @@
+import psycopg2
+
 test_match = {'winner': 'jwong', 'loser': 'brett', 'score': '21-3',
                     'date_of_match': '2018-08-31', 'who_entered': 'jwong', 'who_challenged': 'brett'}
 
-def is_player_valid(player, player_list):
+#Connect to the database and create a cursor
+conn = psycopg2.connect(dbname="pingpong", user="auste_m")
+cursor = conn.cursor()
+
+players_query = """SELECT name FROM player;"""
+player_list_temp = cursor.execute(players_query)
+player_list_temp = cursor.fetchall()
+player_list = [username[0] for username in player_list_temp]
+
+def is_player_valid(player):
     """Checks if the player exists in the players table"""
     return player in player_list
 
@@ -77,7 +88,7 @@ def get_two_players_above(player, leaderboard):
     for row_index in range(len(leaderboard)):
         if leaderboard[row_index]['id'] == player:
             if row_index == 0:
-                return 'You are the leader!'
+                return candidate_list
             elif row_index == 1:
                 player_and_rank_dir_above = (leaderboard[row_index-1]['id'], row_index)
                 candidate_list.append(player_and_rank_dir_above)

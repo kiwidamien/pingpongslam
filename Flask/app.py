@@ -2,6 +2,7 @@ import os
 from flask import Flask, render_template, jsonify, request, abort
 from make_app import app
 from submit_request import store_result
+from can_challenge import you_can_challenge
 
 #  Homepage
 @app.route('/')

@@ -22,13 +22,10 @@ def store_result():
     entered_time = dt.datetime.now()
 
     #Check if the players entered are valid
-
-    #NEED TO RETRIEVE THE PLAYER'S COLUMN FROM PLAYER TABLE
-    players = ['brett', 'jwong', 'damien']
-    if is_player_valid(winner, players) == False:
+    if is_player_valid(winner) == False:
         response = f"{winner} doesn't exist. Please enter a valid winner's username."
 
-    elif is_player_valid(loser, players) == False:
+    elif is_player_valid(loser) == False:
         response = f"{loser} doesn't exist. Please enter a valid loser's username."
 
     #Check if the score entered is valid
