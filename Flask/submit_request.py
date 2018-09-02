@@ -4,11 +4,12 @@ import psycopg2
 from pingpong_api import *
 from make_app import app
 from leaderboard import pull_leaderboard
+from get_db_connection import get_connection
 
 @app.route('/api/submit_result', methods=['POST'])
 def store_result():
     #Connect to the database and create a cursor
-    conn = psycopg2.connect(dbname="pingpong", user="auste_m")
+    conn = get_connection()
     cursor = conn.cursor()
 
     if not request.json:
@@ -67,6 +68,6 @@ def store_result():
         else:
             response = f'Thank you for submitting match result, {enterer}.' #u"\U0001F609"
 
-        conn.close()
+    conn.close()
 
     return jsonify(response)

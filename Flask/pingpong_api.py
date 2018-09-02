@@ -1,19 +1,19 @@
 import psycopg2
-
-test_match = {'winner': 'jwong', 'loser': 'brett', 'score': '21-3',
-                    'date_of_match': '2018-08-31', 'who_entered': 'jwong', 'who_challenged': 'brett'}
-
-#Connect to the database and create a cursor
-conn = psycopg2.connect(dbname="pingpong", user="auste_m")
-cursor = conn.cursor()
-
-players_query = """SELECT name FROM player;"""
-player_list_temp = cursor.execute(players_query)
-player_list_temp = cursor.fetchall()
-player_list = [username[0] for username in player_list_temp]
+from get_db_connection import get_connection
 
 def is_player_valid(player):
     """Checks if the player exists in the players table"""
+
+    #Connect to the database and create a cursor
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    players_query = """SELECT name FROM player;"""
+    player_list_temp = cursor.execute(players_query)
+    player_list_temp = cursor.fetchall()
+    player_list = [username[0] for username in player_list_temp]
+
+    conn.close()
     return player in player_list
 
 def is_date_valid(date):
@@ -103,6 +103,9 @@ def get_two_players_above(player, leaderboard):
 def get_history(player):
     """Retrieves the history of supplier player"""
 
+    conn = get_connection()
+    cursor = conn.cursor()
+
     user_history_query = f"""SELECT match_date, CONCAT(score_winner, '-', score_loser) as score,
                                                     winner, loser,
                                                     CASE WHEN '{player}' = winner THEN win_rank
@@ -126,11 +129,6 @@ def get_history(player):
         }
         match_history.append(history_dict)
 
-    return match_history
-
     conn.close()
 
-
-
-# if __name__ == '__main__':
-#     print(test_match)
+    return match_history
