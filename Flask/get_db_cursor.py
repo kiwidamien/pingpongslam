@@ -10,7 +10,7 @@ def get_cursor():
     host = url.hostname
     port = url.port
 
-    con = psycopg2.connect(
+    con = pg.connect(
         dbname=dbname,
         user=user,
         password=password,
