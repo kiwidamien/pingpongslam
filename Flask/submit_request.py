@@ -3,6 +3,7 @@ import datetime as dt
 import psycopg2
 from pingpong_api import *
 from make_app import app
+from leaderboard import pull_leaderboard
 
 @app.route('/api/submit_result', methods=['POST'])
 def store_result():
@@ -48,12 +49,7 @@ def store_result():
         new_id = last_id + 1
         score_winner = get_winner_loser_score(score)['score_winner']
         score_loser = get_winner_loser_score(score)['score_loser']
-        # leaderboard = pull_leaderboard()
-
-        #WILL HAVE TO BE REPLACED BY JENMEENT'S FUNCTION FOR LEADERBOARD
-        leaderboard = [{'id':'jwong','record':'52-0','previous_rank':'1'},
-                           {'id':'brett','record':'26-7','previous_rank':'2'},
-                           {'id':'damien','record':'24-3','previous_rank':'3'}]
+        leaderboard = pull_leaderboard()
         winner_rank = get_prev_rank(winner, leaderboard)
         loser_rank = get_prev_rank(loser, leaderboard)
 

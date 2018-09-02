@@ -97,7 +97,40 @@ def get_two_players_above(player, leaderboard):
                 candidate_list.append(player_and_rank_2pos_above)
                 player_and_rank_dir_above = (leaderboard[row_index-1]['id'], row_index)
                 candidate_list.append(player_and_rank_dir_above)
+
     return candidate_list
+
+def get_history(player):
+    """Retrieves the history of supplier player"""
+
+    user_history_query = f"""SELECT match_date, CONCAT(score_winner, '-', score_loser) as score,
+                                                    winner, loser,
+                                                    CASE WHEN '{player}' = winner THEN win_rank
+                                                         WHEN '{player}' = loser THEN lose_rank
+                                                         ELSE NULL END as user_rank
+                            FROM match_result
+                            WHERE winner = '{player}' OR loser = '{player}'
+                            ORDER BY match_date DESC"""
+    cursor.execute(user_history_query)
+    user_history = cursor.fetchall()
+
+    match_history = []
+    for date, score, winner, loser, user_rank in user_history:
+        print(date, score, winner, loser, user_rank)
+        history_dict = {
+            'date': date,
+            'score': score,
+            'winner': winner,
+            'loser': loser,
+            'user_rank_log': user_rank
+        }
+        match_history.append(history_dict)
+
+    return match_history
+
+    conn.close()
+
+
 
 # if __name__ == '__main__':
 #     print(test_match)
