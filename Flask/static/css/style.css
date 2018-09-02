@@ -3,7 +3,11 @@ body{
   font-family: 'Calibri';
 }
 
-#leader, #matches{
+#leader{
+    background-color: #A76571;
+}
+
+.matches{
     background-color: #A76571;
 }
 

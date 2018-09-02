@@ -41,7 +41,8 @@ def get_leaderboard_take_n(n):
 @app.route('/username/<username>/')
 def get_matches(username):
     matches = get_user_history(username)
-    return render_template('raw_matches.html', matches=matches, username=username)
+    challenges = you_can_challenge(username)
+    return render_template('raw_matches.html', matches=matches, username=username, challenges=challenges)
 
 
 # Get most n recent matches for given user
@@ -56,7 +57,8 @@ def get_recent_matches_api(username, n):
 def get_recent_matches(username, n):
     n = int(n)
     matches = get_user_history(username)[:n]
-    return render_template('raw_matches.html', matches=matches, username=username)
+    challenges = you_can_challenge(username)
+    return render_template('raw_matches.html', matches=matches, username=username, challenges=challenges)
 
 #  Get list of people to challenge
 @app.route('/api/<username>/can_challenge/')
