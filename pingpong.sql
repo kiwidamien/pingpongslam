@@ -30,13 +30,13 @@ CREATE TABLE match_result(
 */
 CREATE VIEW player_match AS (
 	with lost_matches as (
-		select Match_ID, Loser as user, Score_loser as score, Lose_rank as rank, 'loser' as outcome 
+		select Match_ID, Loser as player, Score_loser as score, Lose_rank as rank, 'loser' as outcome 
 		from match_result
 		
 	)
 	,
 	win_matches as (
-		select Match_ID, Winner as user, Score_winner as score, Win_rank as rank, 'winner' as outcome
+		select Match_ID, Winner as player, Score_winner as score, Win_rank as rank, 'winner' as outcome
 		from match_result
 	)
   select *
