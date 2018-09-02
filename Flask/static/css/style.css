@@ -7,7 +7,7 @@ body{
     background-color: #A76571;
 }
 
-#description{
+#description, #shenanigans{
     background-color: #D8DCFF;
 }
 
@@ -18,14 +18,24 @@ h1{
     font-size: 36;
 }
 
+h2{
+    margin-top: 25;
+    margin-left: 25;
+    margin-right: 25;
+    font-size: 36;
+}
+
 p{
     font-size: 18;
     margin-bottom: 20;
+    margin-left: 20px;
+    margin-top: 20;
 }
 
 table{
     margin-left: : 10px;
     margin-right: 10px;
+    margin-bttom: 10px;
     border: 2px solid black;
     width: 100%;
     padding: 50;

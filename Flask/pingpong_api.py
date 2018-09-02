@@ -4,7 +4,7 @@ test_match = {'winner': 'jwong', 'loser': 'brett', 'score': '21-3',
                     'date_of_match': '2018-08-31', 'who_entered': 'jwong', 'who_challenged': 'brett'}
 
 #Connect to the database and create a cursor
-conn = psycopg2.connect(dbname="pingpong", user="auste_m")
+conn = psycopg2.connect(dbname="pingpong", user="tarekbarnes")
 cursor = conn.cursor()
 
 players_query = """SELECT name FROM player;"""
