@@ -1,10 +1,10 @@
 from flask import Flask, abort, render_template, jsonify, request
 import datetime as dt
 import psycopg2
-from pingpong_api import *
-from make_app import app
-from leaderboard import pull_leaderboard
-from get_db_connection import get_connection
+from .pingpong_api import *
+from .make_app import app
+from .leaderboard import pull_leaderboard
+from .get_db_connection import get_connection
 
 @app.route('/api/submit_result', methods=['POST'])
 def store_result():

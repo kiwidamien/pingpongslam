@@ -1,6 +1,6 @@
 import psycopg2 as pg
 import os
-from get_db_connection import get_connection
+from .get_db_connection import get_connection
 
 def pull_leaderboard():
 
