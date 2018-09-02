@@ -6,8 +6,8 @@ from can_challenge import you_can_challenge
 
 #  Homepage
 @app.route('/')
-def homepage():
-    return render_template('pingpong.html')
+def index():
+    return render_template('index.html')
 
 
 #  Leaderboard
