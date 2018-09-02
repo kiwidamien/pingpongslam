@@ -2,7 +2,7 @@ import psycopg2 as pg
 import urllib.parse as urlparse
 import os
 
-def get_cursor():
+def get_connection():
     url = urlparse.urlparse(os.environ['DATABASE_URL'])
     dbname = url.path[1:]
     user = url.username
@@ -18,4 +18,4 @@ def get_cursor():
         port=port
     )
 
-    return con.cursor()
+    return con
