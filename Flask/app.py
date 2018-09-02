@@ -1,8 +1,11 @@
 import os
 from flask import Flask, render_template, jsonify, request, abort
+
 from make_app import app
 from submit_request import store_result
 from can_challenge import you_can_challenge
+
+from leaderboard import pull_leaderboard
 
 #  Homepage
 @app.route('/')
@@ -13,17 +16,25 @@ def index():
 #  Leaderboard
 @app.route('/leaderboard/')
 def get_leaderboard():
-    ranks = [{'id': 'Jenn Wong', 'record': '150-0', 'previous_rank': '2'},
-             {'id': 'Auste M.', 'record': '22-4', 'previous_rank': '5'},
-             {'id': 'Harmeet Hora', 'record': '50-5', 'previous_rank': '3'},
-             {'id': 'Ilan M.', 'record': '10-1', 'previous_rank': '1'}]
+    ranks = pull_leaderboard()
+    #return jsonify(pull_leaderboard())
+
     return render_template('leaderboard.html', ranks=ranks)
 
 
 #  Get top n from Leaderboard
+@app.route('/api/leaderboard/top/<n>/')
+def get_leaderboard_take_n_api(n):
+    n= int(n)
+    ranks = pull_leaderboard()[:n]
+    return jsonify(ranks)
+
+#  Get top n from Leaderboard
 @app.route('/leaderboard/top/<n>/')
 def get_leaderboard_take_n(n):
-    pass
+    n = int(n)
+    ranks = pull_leaderboard()[:n]
+    return render_template('leaderboard.html', ranks=ranks)
 
 
 # Get matches for given user
