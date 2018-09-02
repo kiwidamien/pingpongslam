@@ -48,5 +48,11 @@ th{
 
 tr:nth-child(even){
   font-size: 16;
-  background-color: #C38D94
+  background-color: #C38D94;
+}
+
+
+a{
+    /* border: 1px solid; */
+    color: #003249;
 }
