@@ -1,5 +1,5 @@
 import os
-from flask import Flask, url_for, render_template, jsonify, request, abort
+from flask import Flask, url_for, render_template, jsonify, request, abort, redirect
 
 from .make_app import app
 from .submit_request import store_result
@@ -7,8 +7,13 @@ from .can_challenge import you_can_challenge
 from .leaderboard import pull_leaderboard
 from .user_history import get_user_history
 
-#  Homepage
+
 @app.route('/')
+def homepage_redirect():
+    return redirect(url_for('get_leaderboard'), code=302)
+
+#  Submission
+@app.route('/submit_match/')
 def index():
     return render_template('index.html')
 

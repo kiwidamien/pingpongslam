@@ -1,5 +1,3 @@
-\connect pingpong;
-
 CREATE TABLE player(
   Rank INT,
   Name TEXT
