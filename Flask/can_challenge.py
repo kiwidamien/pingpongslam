@@ -1,7 +1,7 @@
 from flask import Flask, abort, render_template, jsonify, request
-from pingpong_api import *
-from make_app import app
-from leaderboard import pull_leaderboard
+from .pingpong_api import *
+from .make_app import app
+from .leaderboard import pull_leaderboard
 
 def you_can_challenge(username):
     #Record player's name

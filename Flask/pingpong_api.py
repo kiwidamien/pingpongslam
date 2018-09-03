@@ -1,5 +1,5 @@
 import psycopg2
-from get_db_connection import get_connection
+from .get_db_connection import get_connection
 
 def is_player_valid(player):
     """Checks if the player exists in the players table"""
