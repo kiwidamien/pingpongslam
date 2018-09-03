@@ -1,19 +1,21 @@
 import psycopg2
 from .get_db_connection import get_connection
 
-def is_player_valid(player):
-    """Checks if the player exists in the players table"""
-    #Connect to the database and create a cursor
+def get_all_players():
     conn = get_connection()
     cursor = conn.cursor()
 
-    players_query = """SELECT name FROM player;"""
-    player_list_temp = cursor.execute(players_query)
-    player_list_temp = cursor.fetchall()
-    player_list = [username[0] for username in player_list_temp]
+    players_query = """SELECT name from player ORDER BY name;"""
+    cursor.execute(players_query)
+    player_list = [result[0] for result in cursor.fetchall()]
 
     conn.close()
-    return player in player_list
+    return player_list
+
+def is_player_valid(player):
+    """Checks if the player exists in the players table"""
+    #Connect to the database and create a cursor
+    return player in get_all_players()
 
 def is_date_valid(date):
     """Checks if the date is valid"""

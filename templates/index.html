@@ -21,12 +21,12 @@
       <form id="ajax-contact" method="post">
           <div class="field">
               <label for="winner">Winner: <br></label>
-              <input type="text" id="winner" name="winner"><br>
+              <input type="list" list="players" id="winner" name="winner"><br>
           </div>
 
           <div class="field">
               <label for="loser">Loser: <br></label>
-              <input type="text" id="loser" name="loser"><br>
+              <input type="list" list="players" id="loser" name="loser"><br>
           </div>
 
           <div class="field">
@@ -46,8 +46,14 @@
 
           <div class="field">
               <label for="who_challenged">Challenger: <br></label>
-              <input type="text" id="who_challenged" name="who_challenged"><br>
+              <input type="list" list="players" id="who_challenged" name="who_challenged"><br>
           </div>
+
+          <datalist id="players">
+              {% for player in players %}
+                  <option value="{{player}}">
+              {% endfor %}
+          </datalist>
       </form>
 
   <div id="form-messages"></div>

@@ -6,7 +6,7 @@ from .submit_request import store_result
 from .can_challenge import you_can_challenge
 from .leaderboard import pull_leaderboard
 from .user_history import get_user_history
-
+from .pingpong_api import get_all_players
 
 @app.route('/')
 def homepage_redirect():
@@ -15,7 +15,8 @@ def homepage_redirect():
 #  Submission
 @app.route('/submit_match/')
 def index():
-    return render_template('index.html')
+    players = get_all_players()
+    return render_template('index.html', players=players)
 
 
 #  Leaderboard
